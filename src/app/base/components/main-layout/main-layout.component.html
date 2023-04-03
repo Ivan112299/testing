@@ -1,0 +1,29 @@
+<nav >
+    <nav class="navbar">
+        <h1>
+            <a routerLink="/">Testing</a>
+        </h1>
+        <ul>
+            <li routerLinkActive="active">
+                <a [routerLink]="['/about']">О проекте</a>
+            </li> 
+            <li routerLinkActive="active">
+                <a [routerLink]="['/testing']">Теория</a>
+            </li>
+            <li routerLinkActive="active">
+                <a [routerLink]="['/feedback']" >Обратная связь</a>
+            </li> 
+            <li routerLinkActive="active">
+                <a [routerLink]="['/login']" >Вход</a>
+            </li> 
+        </ul>
+        <ul>
+            <li>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+            </li>
+        </ul>
+    </nav>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,7 @@
+
+<div >
+    <div *ngFor="let chapter of chapters">
+        <a [routerLink]="['/testing/chapter', chapter!.id ]" (click)="getChapterId(chapter!.id)">{{chapter.name}}</a>
+    </div>
+    <app-content></app-content>
+</div>
