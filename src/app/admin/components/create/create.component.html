@@ -1,0 +1,9 @@
+<div>
+    <form [formGroup]="formCreateLesson" (ngSubmit)="submit()">
+        <div class="form-control">
+            <label for="title">Заголовок</label>
+            <input type="text" id="title" formControlName="title">
+        </div>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
