@@ -1,6 +1,8 @@
+import { LessonService } from './../../../services/lesson.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Chapter } from '../../interfaces/interfaces';
+import { Subscription } from 'rxjs';
+import { Chapter, Lesson } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-content',
@@ -11,34 +13,32 @@ import { Chapter } from '../../interfaces/interfaces';
 
 export class ContentComponent implements OnInit {
 
-  @Input()
-  chapterId: Number | undefined
-
   currentPostId!: string
-  chapters: Chapter[] = [
-    {name: 'Раздел 1', id: 1, text: 'Test1'},
-    {name: 'Раздел 2', id: 2, text: 'Test2'},
-    {name: 'Раздел 3', id: 3, text: 'Test3'},
-    {name: 'Раздел 4', id: 4, text: 'Test4'},
-  ]
-  currentChapter: Chapter | undefined
+  currentChapter: Lesson | undefined
+  routeParam$: Subscription | undefined
+  currentChapter$: Subscription | undefined
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lessonService: LessonService
     ){}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) =>{    
-      
+    this.routeParam$ = this.route.params.subscribe((params: Params) =>{      
       this.currentPostId = params['id']
-      console.log('sdfasdfa', this.currentPostId);
-    }) 
-    this.currentChapter = this.chapters.find(chapter => chapter.id == Number(this.currentPostId))
-
+      console.log('curId',this.currentPostId)
+      this.currentChapter$ = this.lessonService.getLesson(this.currentPostId).subscribe((lesson) =>{
+        this.currentChapter = lesson
+      })
+    })
+   
   }
-
   ngOnChange(){
     
+  }
+  ngOnDestroy(){
+    this.routeParam$?.unsubscribe()
+    this.currentChapter$?.unsubscribe()
   }
 
 }

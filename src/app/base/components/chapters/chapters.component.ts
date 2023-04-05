@@ -1,5 +1,8 @@
+import { Chapter } from './../../interfaces/interfaces';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Route } from '@angular/router';
+import { ActivatedRoute, Route, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LessonService } from 'src/app/services/lesson.service';
 
 @Component({
   selector: 'app-chapters',
@@ -7,25 +10,31 @@ import { Route } from '@angular/router';
   styleUrls: ['./chapters.component.less']
 })
 export class ChaptersComponent implements OnInit{
-
-  chapters = [
-    {name: 'Раздел 1', id: 1, text: 'Test1'},
-    {name: 'Раздел 2', id: 2, text: 'Test2'},
-    {name: 'Раздел 3', id: 3, text: 'Test3'},
-    {name: 'Раздел 4', id: 4, text: 'Test4'},
+  
+  chapters$: Subscription | undefined
+  chapters: Chapter[] = [
   ]
   
   @Output()
   chapterId: EventEmitter<Number> = new EventEmitter<Number>()
 
-  constructor(){
+  constructor(
+    private lessonService: LessonService,
+    private router: ActivatedRoute
+  ){}
+  getChapterId(id: String){
 
   }
-  getChapterId(id: Number){
-    this.chapterId.emit(id)
-    console.log('chapterId', this.chapterId)
-  }
   ngOnInit(): void {
+    this.chapters$ = this.lessonService.getAllChapters().subscribe(
+      (lessons) => {
+        this.chapters = lessons
+      }
+    )
+  }
+
+  ngOnDestroy(){
+    this.chapters$?.unsubscribe()
   }
 
 }

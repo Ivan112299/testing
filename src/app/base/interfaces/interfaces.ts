@@ -1,5 +1,11 @@
-export interface Chapter {
+export interface Lesson {
+    author: string
     id?: number
     text: string
-    name: string
+    title: string
+}
+
+export interface Chapter {
+    id: string ,
+    title: string
 }

@@ -1,7 +1,7 @@
 
 <div >
     <div *ngFor="let chapter of chapters">
-        <a [routerLink]="['/testing/chapter', chapter!.id ]" (click)="getChapterId(chapter!.id)">{{chapter.name}}</a>
+        <a [routerLink]="['/testing/chapter', chapter!.id ]" (click)="getChapterId(chapter.id)">{{chapter.title}}</a>
     </div>
-    <app-content></app-content>
+    <router-outlet></router-outlet>    
 </div>
