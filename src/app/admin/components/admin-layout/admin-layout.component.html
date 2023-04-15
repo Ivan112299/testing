@@ -11,7 +11,7 @@
                 <a [routerLink]="['/admin','lessons']" >Редактировать</a>
             </li> 
             <li routerLinkActive="active">
-                <a [routerLink]="['/login']" >Выход</a>
+                <a [routerLink]="['/login']" (click)="logout()">Выход</a>
             </li> 
         </ul>
     </nav>

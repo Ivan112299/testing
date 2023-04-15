@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseModule } from './base/base.module';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { BaseModule } from './base/base.module';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

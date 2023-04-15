@@ -9,7 +9,9 @@ import { map } from 'rxjs/internal/operators/map';
 export class LessonService {
 
   fbDbUrl = 'https://testing-4da51-default-rtdb.firebaseio.com'
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+    ) {}
 
   
   getAllLessons(){

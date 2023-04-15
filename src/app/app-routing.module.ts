@@ -7,6 +7,7 @@ import { TestingComponent } from './base/components/testing/testing.component';
 import { FeedbackComponent } from './base/components/feedback/feedback.component';
 import { LoginPageComponent } from './admin/components/login-page/login-page.component';
 import { ContentComponent } from './base/components/content/content.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
     {path: '', component: MainLayoutComponent, children: [
@@ -18,7 +19,7 @@ const routes: Routes = [
         {path: 'feedback', component: FeedbackComponent},
         {path: 'login', component: LoginPageComponent},
     ]},
-    {path:'admin', loadChildren:() => import('./admin/admin.module').then(m=>m.AdminModule)}   // используем lazyLoading
+    {path:'admin',  loadChildren:() => import('./admin/admin.module').then(m=>m.AdminModule)}   // используем lazyLoading
 ];
 
 @NgModule({

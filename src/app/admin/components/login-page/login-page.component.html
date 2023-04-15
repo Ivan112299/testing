@@ -1,1 +1,17 @@
-<p>login-page works!</p>
+<div class="container container-form">
+    <form  [formGroup]="loginForm" action="submit">
+        <div class="item">
+            <label>Логин</label>
+            <input type="text" formControlName="email">
+            <span *ngIf="">Ошибка</span>
+        </div>
+        <div class="item">
+            <label>Пароль</label>
+            <input type="text" formControlName="password">
+        </div>
+        <div class="item" (click)="submit()">
+            <button type="submit">Войти</button>
+        </div>
+    </form>
+</div>
+
