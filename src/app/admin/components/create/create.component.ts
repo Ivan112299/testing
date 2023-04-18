@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Editor, Toolbar } from 'ngx-editor';
+import { mergeMap } from 'rxjs';
+import { Chapter, Lesson } from 'src/app/base/interfaces/interfaces';
+import { LessonService } from 'src/app/services/lesson.service';
 
 @Component({
   selector: 'app-create',
@@ -21,8 +24,12 @@ export class CreateComponent implements OnInit {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
   html!: '';
+  lesson!: Lesson
+  chapter!: Chapter
 
-  constructor(){
+  constructor(
+    private lessonService: LessonService
+    ){
 
   }
   formCreateLesson!: FormGroup
@@ -39,10 +46,26 @@ export class CreateComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.formCreateLesson.get('genre'))
-    console.log('собираем данные');
     let formData = this.formCreateLesson.value
-    console.log(formData)
+    this.lesson  = {
+      ...formData,
+      date: new Date(),
+      author: 'Текущий пользователь'
+    }
+
+    this.lessonService.addLesson(this.lesson)
+    .pipe(
+      mergeMap((les) =>{
+        this.chapter  = {
+              idLesson: les.name,
+              title: this.lesson.title
+            }
+        return this.lessonService.addChapter(this.chapter)
+      })
+    )
+    .subscribe(response =>
+        console.log('итоговый респ', response?.name)
+      )
     this.formCreateLesson.reset()
   }
 }

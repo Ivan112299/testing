@@ -1,7 +1,7 @@
 
     <div  >
         <div class="container-chapters-items" *ngFor="let chapter of chapters">
-            <a [routerLink]="['/testing/chapter', chapter!.id ]" (click)="getChapterId(chapter.id)">{{chapter.title}}</a>
+            <a [routerLink]="['/testing/chapter', chapter!.idLesson ]" (click)="getChapterId(chapter.idLesson)">{{chapter.title}}</a>
         </div> 
     </div>
 

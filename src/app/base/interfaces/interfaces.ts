@@ -3,10 +3,11 @@ export interface Lesson {
     id?: number
     text: string
     title: string
+    isDelete?: string
 }
 
 export interface Chapter {
-    id: string ,
+    idLesson: string ,
     title: string
 }
 
@@ -18,4 +19,8 @@ export interface User {
 export interface fbAuthResponse {
     idToken: string,
     expiresIn: Number
+}
+
+export interface fbCreateResponse {
+   name: string
 }
