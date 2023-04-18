@@ -4,6 +4,13 @@
             <label for="title">Заголовок</label>
             <input type="text" id="title" formControlName="title">
         </div>
+        <div class="form-control">
+            <label for="text">Текст</label>
+            <div class="NgxEditor__Wrapper">
+                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+                <ngx-editor formControlName="text" [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Введите текст...'"></ngx-editor>
+            </div>
+        </div>
         <button type="submit">Сохранить</button>
     </form>
 </div>

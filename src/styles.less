@@ -27,6 +27,9 @@ body {
     display: flex;
     li{
       margin: 10px;
+      svg {
+        fill:  var(--active-link);
+      }
     }
   }
   li.active a {
@@ -35,11 +38,10 @@ body {
     cursor: default;
     size: 18px;
   }
-
   a {
     color: #fff;
     opacity: .7;
-    padding: 0.45rem;
+    padding: 0.65rem;
     margin: 0 0.25rem;
     &:hover {
       color: var(--light-color);

@@ -28,6 +28,9 @@ body {
 .navbar ul li {
   margin: 10px;
 }
+.navbar ul li svg {
+  fill: var(--active-link);
+}
 .navbar li.active a {
   color: var(--active-link);
   opacity: 1;
@@ -37,7 +40,7 @@ body {
 .navbar a {
   color: #fff;
   opacity: 0.7;
-  padding: 0.45rem;
+  padding: 0.65rem;
   margin: 0 0.25rem;
 }
 .navbar a:hover {
