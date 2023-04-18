@@ -7,7 +7,6 @@ import { ChaptersComponent } from './components/chapters/chapters.component';
 import { ContentComponent } from './components/content/content.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -23,8 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FontAwesomeModule 
+    RouterModule
   ]
 })
 export class BaseModule { }
