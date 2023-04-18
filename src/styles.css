@@ -25,6 +25,9 @@ body {
 .navbar ul {
   display: flex;
 }
+.navbar ul li {
+  margin: 10px;
+}
 .navbar li.active a {
   color: var(--active-link);
   opacity: 1;

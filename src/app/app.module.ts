@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseModule } from './base/base.module';
 import { AuthService } from './services/auth.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthService } from './services/auth.service';
     BaseModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

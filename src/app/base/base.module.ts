@@ -7,6 +7,7 @@ import { ChaptersComponent } from './components/chapters/chapters.component';
 import { ContentComponent } from './components/content/content.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -18,10 +19,12 @@ import { RouterModule } from '@angular/router';
     ChaptersComponent,
     ContentComponent,
     FeedbackComponent,
+    
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FontAwesomeModule 
   ]
 })
 export class BaseModule { }

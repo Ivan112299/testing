@@ -11,10 +11,7 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivate(): boolean {
     if(this.auth.isAuth()){
         return true
     }else {
@@ -22,13 +19,9 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['admin/', 'login'])
         return false
     }
-    
   }
 
-  canActivateChild(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivateChild(): boolean {
     if(this.auth.isAuth()){
         return true
     }else {
