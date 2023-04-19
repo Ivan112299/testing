@@ -12,15 +12,26 @@ body {
   font-size: 1rem;
   line-height: 1.6;
 }
+body ::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+  background: rgba(84, 84, 212, 0.27) 0%;
+  opacity: 0.8;
+}
+body ::-webkit-scrollbar-thumb {
+  background: rgba(84, 84, 212, 0.616) 0%;
+  border-radius: 10px;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
+  position: fixed;
   align-items: center;
   padding: 0.7rem 2rem;
   z-index: 1;
   width: 100%;
   opacity: 0.9;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 .navbar ul {
   display: flex;
@@ -46,11 +57,14 @@ body {
 .navbar a:hover {
   color: var(--light-color);
 }
+.main-content {
+  padding-top: 100px;
+}
 .base-container {
   position: relative;
   background-color: #19191B;
-  padding: 20px;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 100%;
   z-index: 0;
 }
@@ -67,8 +81,15 @@ body {
   border-radius: 233.5px;
   transform: rotate(-145deg);
 }
+.content-create {
+  color: var(--light-color);
+  overflow: auto;
+  height: 86vh;
+}
 .content-lession {
   color: var(--light-color);
+  overflow: auto;
+  height: 86vh;
 }
 .container-chapters {
   width: 25%;

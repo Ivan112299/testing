@@ -1,10 +1,10 @@
-<div>
+<div class="container ">
     <form [formGroup]="formCreateLesson" (ngSubmit)="submit()">
         <div class="form-control">
             <label for="title">Заголовок</label>
             <input type="text" id="title" formControlName="title">
         </div>
-        <div class="form-control">
+        <div class="form-control ">
             <label for="text">Текст</label>
             <div class="NgxEditor__Wrapper">
                 <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>

@@ -13,16 +13,27 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
+    ::-webkit-scrollbar {
+      width: 8px;
+      border-radius: 10px;
+      background: rgba(84, 84, 212, 0.27) 0%;
+      opacity: .8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(84, 84, 212, 0.616) 0%; 
+      border-radius: 10px;
+    }
   }
 .navbar {
   display: flex;
   justify-content: space-between;
+  position: fixed;
   align-items: center;
   padding: 0.7rem 2rem;
   z-index: 1;
   width: 100%;
   opacity: 0.9;
-  margin-bottom: 1rem;
+  margin: 1rem;
   ul {
     display: flex;
     li{
@@ -48,11 +59,14 @@ body {
     }
   }
 }
+.main-content{
+  padding-top: 100px;
+}
 .base-container{
   position: relative;
   background-color: #19191B;
-  padding: 20px;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 100%;
   z-index: 0;
   &:after{
@@ -70,8 +84,16 @@ body {
   }
  
 }
+// объединить и упростить
+.content-create{
+  color: var(--light-color);
+  overflow: auto;
+  height: 86vh;
+}
 .content-lession{
   color: var(--light-color);
+  overflow: auto;
+  height: 86vh;
 }
 .container-chapters{
   width: 25%;
@@ -110,7 +132,6 @@ body {
   padding: 10px;
   margin: 10px;
   width: 75%;
-  
   background-color: #ffffff11;
 }
 .testing-page{
@@ -121,10 +142,6 @@ body {
 //--------------//
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
-
-
-
 
 * {
   box-sizing: border-box;
