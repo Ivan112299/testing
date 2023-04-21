@@ -1,1 +1,12 @@
-<p>lessons works!</p>
+<div class="lessons-container">
+    <div class="lessons-item"*ngFor="let lesson of lessons">
+        <div class="title">
+            <p>{{lesson.title}}</p>
+        </div>
+        
+        <div class="text">
+            <p>{{lesson.text}}</p>
+        </div>
+       
+    </div>
+</div>
