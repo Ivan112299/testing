@@ -1,4 +1,4 @@
-import { Chapter, Lesson, fbCreateResponse } from './../base/interfaces/interfaces';
+import { Chapter, Lesson, fbCreateResponse, fbUpdateResponse } from './../base/interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/internal/operators/map';
@@ -61,6 +61,15 @@ export class LessonService {
     return this.http.post(`${this.fbDbUrl}/chapters.json`, body)
     .pipe(map((response)=>{
         return response as fbCreateResponse
+    }))
+  }
+
+  updateLesson(body: Lesson, id: string){
+    /*** метод обновления содержания урока ***/
+
+    return this.http.put(`${this.fbDbUrl}/lessons/${id}.json`, body)
+    .pipe(map((response)=>{
+        return response as fbUpdateResponse
     }))
   }
 }

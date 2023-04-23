@@ -24,3 +24,7 @@ export interface fbAuthResponse {
 export interface fbCreateResponse {
    name: string
 }
+
+export interface fbUpdateResponse {
+   name: string
+}

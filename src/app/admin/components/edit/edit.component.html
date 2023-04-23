@@ -1,5 +1,5 @@
 <div class="container ">
-    <form [formGroup]="formCreateLesson" (ngSubmit)="submit()">
+    <form *ngIf="lesson"[formGroup]="formEditLesson" (ngSubmit)="submit()">
         <div class="form-control">
             <label for="title">Заголовок</label>
             <input type="text" id="title" formControlName="title">
@@ -8,9 +8,11 @@
             <label for="text">Текст</label>
             <div class="NgxEditor__Wrapper">
                 <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-                <ngx-editor formControlName="text" [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Введите текст...'"></ngx-editor>
+                <ngx-editor formControlName="text" [editor]="editor" [disabled]="false" [placeholder]="'Введите текст...'"></ngx-editor>
             </div>
         </div>
         <button class="btn" type="submit">Сохранить</button>
+        <button class="btn" [routerLink]="['/admin','lessons']">Вернуться</button>>
     </form>
+    
 </div>
