@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Editor, Toolbar, toHTML } from 'ngx-editor';
-import { mergeMap } from 'rxjs';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
+import { Editor, Toolbar } from 'ngx-editor';
+import { take } from 'rxjs';
 import { Chapter, Lesson } from 'src/app/base/interfaces/interfaces';
 import { LessonService } from 'src/app/services/lesson.service';
 
-import { toDoc } from 'ngx-editor';
 
 @Component({
   selector: 'app-edit',
@@ -34,7 +33,8 @@ export class EditComponent {
 
   constructor(
     private lessonService: LessonService,
-    private router: ActivatedRoute
+    private activatedRouter: ActivatedRoute,
+    private router: Router
     ){
 
   }
@@ -42,7 +42,7 @@ export class EditComponent {
 
   ngOnInit(): void {
     // получаю id урока из адресной строки
-    this.router.params.subscribe(
+    this.activatedRouter.params.subscribe(
       (params: Params) => {
         this.currentLessonId  = params['id']
       }
@@ -54,7 +54,6 @@ export class EditComponent {
         this.lesson = lesson
         
         this.editor = new Editor();
-        this.jsonDoc = toDoc(lesson.text);
         this.formEditLesson = new FormGroup({
           text: new FormControl(lesson.text, Validators.required),
           title: new FormControl(this.lesson?.title, Validators.required)
@@ -68,16 +67,38 @@ export class EditComponent {
   }
 
   submit(){
+    console.log('Вызов самита')
     let formData = this.formEditLesson.value
     this.lesson  = {
       ...formData,
       date: new Date(),
       author: 'Текущий пользователь'
     }
-
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
+    .pipe(take(1))
     .subscribe(response =>
         console.log('итоговый респ', response)
       )
+  }
+
+  toArchive(){
+    this.lesson.isDelete = true
+    this.lessonService.updateLesson(this.lesson, this.currentLessonId)
+    .pipe(take(1))
+    .subscribe(response =>{
+        this.router.navigate(['/admin','lessons'])
+        console.log('итоговый респ', response)
+      }
+    )
+  }
+
+  removeFromArchive(){
+    this.lesson.isDelete = false
+    this.lessonService.updateLesson(this.lesson, this.currentLessonId)
+    .pipe(take(1))
+    .subscribe(response =>{
+        console.log('итоговый респ', response)
+      }
+    )
   }
 }

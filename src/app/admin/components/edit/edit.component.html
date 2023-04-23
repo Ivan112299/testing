@@ -1,5 +1,13 @@
-<div class="container ">
+<div class="container edit-container">
     <form *ngIf="lesson"[formGroup]="formEditLesson" (ngSubmit)="submit()">
+        <div class="controls">
+            <button class="btn" type="submit">Сохранить</button>
+            <button class="btn" type="button" [routerLink]="['/admin','lessons']">Вернуться</button>
+            <button class="btn" type="button" (click)="toArchive()">Архивировать</button>
+            <button class="btn" type="button" (click)="removeFromArchive()">Восстановить</button>
+            <span *ngIf="lesson && lesson.isDelete">В архиве</span>
+        </div>
+        
         <div class="form-control">
             <label for="title">Заголовок</label>
             <input type="text" id="title" formControlName="title">
@@ -11,8 +19,7 @@
                 <ngx-editor formControlName="text" [editor]="editor" [disabled]="false" [placeholder]="'Введите текст...'"></ngx-editor>
             </div>
         </div>
-        <button class="btn" type="submit">Сохранить</button>
-        <button class="btn" [routerLink]="['/admin','lessons']">Вернуться</button>>
+        
     </form>
     
 </div>

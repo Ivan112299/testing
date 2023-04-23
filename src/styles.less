@@ -85,14 +85,25 @@ body {
  
 }
 // объединить и упростить
+
 .content-create{
   color: var(--light-color);
   overflow: auto;
   height: 86vh;
+  
 }
 .content-admin {
   overflow: auto;
   height: 86vh;
+}
+.edit-container{
+  .controls{
+    span {
+      color: var(--light-color);
+      opacity: .6;
+    }
+  }
+  
 }
 .content-lession{
   color: var(--light-color);
@@ -151,9 +162,7 @@ body {
   color: var(--light-color);
   overflow: auto;
   .lessons-item {
-    &:hover{
-      border: 1px solid var(--active-link);
-    }
+    position: relative;
     margin: 15px;
     padding: 10px;
     background-color: #ffffff11;
@@ -168,6 +177,16 @@ body {
       width: 80%;
       height: 60%;
       margin: 10px
+    }
+    &.archived{
+      color: #7f7f7f;
+      background-color: #ffffff34;
+    }
+    small {
+      margin-left: 50px;
+    }
+    &:hover{
+      border: 1px solid var(--active-link);
     }
   }
 }
@@ -384,6 +403,7 @@ img {
   display: block;
   color: #888;
   margin-bottom: .8rem;
+  margin-top: .8rem;
 
   &.invalid {
     color: var(--primary-color);

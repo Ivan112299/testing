@@ -10,7 +10,7 @@ import { Lesson } from 'src/app/base/interfaces/interfaces';
 export class LessonsComponent implements OnInit{
 
   lessons: Lesson[] = []
-
+  
   constructor(
     private lessonService: LessonService
   ){
@@ -23,6 +23,10 @@ export class LessonsComponent implements OnInit{
       this.lessons = lessons
       console.log(this.lessons)
     })
+  }
+
+  ngOnDestroy(){
+    this.lessons = []
   }
 
 }

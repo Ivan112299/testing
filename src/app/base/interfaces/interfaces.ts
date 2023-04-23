@@ -3,7 +3,7 @@ export interface Lesson {
     id?: number
     text: string
     title: string
-    isDelete?: string
+    isDelete?: boolean
 }
 
 export interface Chapter {
