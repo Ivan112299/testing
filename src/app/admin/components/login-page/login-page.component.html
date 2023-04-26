@@ -1,17 +1,19 @@
-<div class="container container-form">
-    <form  [formGroup]="loginForm" action="submit">
-        <div class="item">
-            <label>Логин</label>
-            <input type="text" formControlName="email">
-            <span *ngIf="">Ошибка</span>
-        </div>
-        <div class="item">
-            <label>Пароль</label>
-            <input type="text" formControlName="password">
-        </div>
-        <div class="item" (click)="submit()">
-            <button class="btn" type="submit">Войти</button>
-        </div>
-    </form>
+<div class="container">
+    <div class="login-page">
+        <form  [formGroup]="loginForm" action="submit">
+            <div class="item">
+                <label>Логин</label>
+                <input type="text" formControlName="email">
+                <span *ngIf="">Ошибка</span>
+            </div>
+            <div class="item">
+                <label>Пароль</label>
+                <input type="text" formControlName="password">
+            </div>
+            <div class="item" (click)="submit()">
+                <button class="btn" type="submit">Войти</button>
+            </div>
+        </form>
+    </div>    
 </div>
 

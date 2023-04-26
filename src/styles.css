@@ -1,16 +1,25 @@
 :root {
   --primary-color: #dc3545;
   --dark-color: #333333;
-  --light-color: #f4f4f4;
+  --light-color: #cccaca;
   --danger-color: #dc3545;
   --success-color: #28a745;
   --active-link: #5454D4;
-  --base-bgc: #ffffff11;
+  --base-bgc: #11112b;
 }
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
+}
+body .base-container {
+  position: relative;
+  top: 0;
+  background-color: var(--base-bgc);
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
 }
 body ::-webkit-scrollbar {
   width: 8px;
@@ -22,6 +31,23 @@ body ::-webkit-scrollbar-thumb {
   background: rgba(84, 84, 212, 0.616) 0%;
   border-radius: 10px;
 }
+.btn {
+  display: inline-block;
+  background: var(--active-link);
+  color: #ffffff;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+}
+.btn:disabled {
+  cursor: not-allowed;
+  background: var(--light-color);
+  color: #111;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -30,8 +56,7 @@ body ::-webkit-scrollbar-thumb {
   padding: 0.7rem 2rem;
   z-index: 1;
   width: 100%;
-  opacity: 0.9;
-  margin: 1rem;
+  background-color: var(--base-bgc);
 }
 .navbar ul {
   display: flex;
@@ -57,49 +82,18 @@ body ::-webkit-scrollbar-thumb {
 .navbar a:hover {
   color: var(--light-color);
 }
-.main-content {
-  padding-top: 100px;
-}
-.base-container {
-  position: relative;
-  background-color: #19191B;
-  min-height: 100vh;
-  height: 100%;
-  width: 100%;
-  z-index: 0;
-}
-.base-container:after {
-  content: '';
-  position: absolute;
-  width: 800px;
-  height: 300px;
-  left: 0px;
-  top: 400px;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(84, 84, 212, 0.27) 0%, rgba(9, 9, 241, 0.113) 100%);
-  filter: blur(150px);
-  border-radius: 233.5px;
-  transform: rotate(-145deg);
-}
-.content-create {
-  color: var(--light-color);
+.container {
+  padding-right: 100px;
+  width: auto;
+  height: 100vh;
   overflow: auto;
-  height: 86vh;
-}
-.content-admin {
-  overflow: auto;
-  height: 86vh;
-}
-.edit-container .controls span {
+  padding: 6rem 13rem 0;
   color: var(--light-color);
-  opacity: 0.6;
 }
-.content-lession {
-  color: var(--light-color);
-  overflow: auto;
-  height: 86vh;
+.testing-page {
+  display: flex;
 }
-.container-chapters {
+.testing-page .container-chapters {
   width: 25%;
   display: flex;
   flex-direction: column;
@@ -111,7 +105,7 @@ body ::-webkit-scrollbar-thumb {
   margin: 10px;
   z-index: 1;
 }
-.container-chapters .container-chapters-items {
+.testing-page .container-chapters .container-chapters-items {
   padding: 5px;
   margin: 5px;
   background-color: #ffffff11;
@@ -119,37 +113,40 @@ body ::-webkit-scrollbar-thumb {
   cursor: pointer;
   transition: 0.3s;
 }
-.container-chapters .container-chapters-items a {
+.testing-page .container-chapters .container-chapters-items a {
   color: var(--light-color);
+  display: inline-block;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
   text-decoration: none;
 }
-.container-chapters .container-chapters-items:hover {
+.testing-page .container-chapters .container-chapters-items:hover {
   background-color: #ffffff22;
   transform: translateX(10px);
 }
-.container-content {
+.testing-page .container-content-lesson {
   z-index: 1;
   display: flex;
-  padding: 10px;
+  padding: 25px;
   margin: 10px;
   width: 75%;
   background-color: #ffffff11;
+  color: var(--light-color);
+  overflow: auto;
 }
-.testing-page {
-  display: flex;
-}
-.lessons-container {
+.edit-lessons-page {
   max-width: 1600px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   color: var(--light-color);
   overflow: auto;
 }
-.lessons-container .lessons-item {
+.edit-lessons-page .lessons-item {
   position: relative;
   margin: 15px;
   padding: 10px;
@@ -157,42 +154,35 @@ body ::-webkit-scrollbar-thumb {
   width: 300px;
   height: 250px;
 }
-.lessons-container .lessons-item .title {
+.edit-lessons-page .lessons-item .title {
   margin: 10px;
 }
-.lessons-container .lessons-item .text {
+.edit-lessons-page .lessons-item .text {
   overflow: hidden;
   display: block;
   width: 80%;
   height: 60%;
   margin: 10px;
 }
-.lessons-container .lessons-item.archived {
+.edit-lessons-page .lessons-item.archived {
   color: #7f7f7f;
   background-color: #ffffff34;
 }
-.lessons-container .lessons-item small {
+.edit-lessons-page .lessons-item small {
   margin-left: 50px;
 }
-.lessons-container .lessons-item:hover {
+.edit-lessons-page .lessons-item:hover {
   border: 1px solid var(--active-link);
 }
-.btn {
-  display: inline-block;
-  background: var(--active-link);
-  color: #ffffff;
-  padding: 0.3rem 1rem;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  transition: opacity 0.2s ease-in;
-  outline: none;
+.login-page {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 20px 20px;
 }
-.btn:disabled {
-  cursor: not-allowed;
-  background: var(--light-color);
-  color: #111;
+.login-page .item {
+  margin: 10px 10px;
+  color: white;
 }
 @font-face {
   font-family: 'Roboto';
@@ -225,12 +215,6 @@ ul {
 }
 img {
   width: 100%;
-}
-.container {
-  max-width: 1600px;
-  margin: auto;
-  overflow: hidden;
-  padding: 0 2rem;
 }
 .text-primary {
   color: var(--primary-color);

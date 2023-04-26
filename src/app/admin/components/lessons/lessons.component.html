@@ -1,16 +1,18 @@
-<div class="lessons-container">
-    <div class="lessons-item" [ngClass]="{archived : lesson.isDelete}" *ngFor="let lesson of lessons">
-        <div class="title">
-            <p>{{lesson.title}}</p>
+<div class="container">
+    <div class="edit-lessons-page">
+        <div class="lessons-item" [ngClass]="{archived : lesson.isDelete}" *ngFor="let lesson of lessons">
+            <div class="title">
+                <p>{{lesson.title}}</p>
+            </div>
+            
+            <div class="text">
+                <div [innerHTML] = "lesson.text"></div>
+            </div>
+            <div>
+                <button class="btn" [routerLink]="['/admin','lesson', lesson.id]">Редактировать</button>
+                <small *ngIf="lesson.isDelete">В архиве</small>
+            </div> 
+            
         </div>
-        
-        <div class="text">
-            <div [innerHTML] = "lesson.text"></div>
-        </div>
-        <div>
-            <button class="btn" [routerLink]="['/admin','lesson', lesson.id]">Редактировать</button>
-            <small *ngIf="lesson.isDelete">В архиве</small>
-        </div> 
-        
     </div>
 </div>
