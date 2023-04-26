@@ -1,14 +1,23 @@
 <div class="container">
     <div class="login-page">
-        <form  [formGroup]="loginForm" action="submit">
+        <form class="form-box" [formGroup]="loginForm" action="submit">
+            <h4 class="item">Авторизация</h4>
+            <small class="item" *ngIf="nonAuth">Необходима авторизация для просмотра данной страницы</small>
             <div class="item">
-                <label>Логин</label>
-                <input type="text" formControlName="email">
+                <div class="input-box">
+                    <input type="text" formControlName="email" required>
+                    <label>Логин</label>
+                </div>
+                <i class="fa-regular fa-envelope"></i>
                 <span *ngIf="">Ошибка</span>
             </div>
             <div class="item">
-                <label>Пароль</label>
-                <input type="text" formControlName="password">
+                <div class="input-box">
+                    
+                    <input type="text" formControlName="password" required>
+                    <label>Пароль</label>
+                </div>
+                <i class="fa-regular fa-user"></i>
             </div>
             <div class="item" (click)="submit()">
                 <button class="btn" type="submit">Войти</button>

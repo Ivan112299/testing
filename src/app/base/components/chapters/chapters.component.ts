@@ -32,7 +32,7 @@ export class ChaptersComponent implements OnInit{
       }
     )
   }
-
+  
   ngOnDestroy(){
     this.chapters$?.unsubscribe()
   }

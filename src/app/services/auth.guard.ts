@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
         return true
     }else {
         this.auth.logout()
-        this.router.navigate(['admin/', 'login'])
+        this.router.navigate(['admin/', 'login'], { queryParams: { nonAuth: true } })
         return false
     }
   }
@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
         return true
     }else {
         this.auth.logout()
-        this.router.navigate(['admin/', 'login'])
+        this.router.navigate(['admin/', 'login'], { queryParams: { nonAuth: true } })
         return false
     }
   }

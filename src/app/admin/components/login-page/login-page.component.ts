@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Route, Router, Params, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,15 +11,22 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPageComponent implements OnInit {
 
   loginForm!: FormGroup
+  nonAuth!: Boolean
  
 
   constructor (
     private auth: AuthService, 
-    private router: Router){
+    private router: Router,
+    private activeRoute: ActivatedRoute){
     
   }
 
   ngOnInit(): void {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.nonAuth = params['nonAuth']
+      console.log('Авторизованы: ',params)
+    })
+    
     this.loginForm = new FormGroup({
       email: new FormControl('test@gmail.com'),
       password: new FormControl('123456')

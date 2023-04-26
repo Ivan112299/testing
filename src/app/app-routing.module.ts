@@ -11,7 +11,7 @@ import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
     {path: '', component: MainLayoutComponent, children: [
-        {path: '', redirectTo: '/', pathMatch: 'full'},
+        {path: '', redirectTo: '/about', pathMatch: 'full'},
         {path: 'about', component: AboutComponent},
         {path: 'testing', component: TestingComponent, children: [
             {path: 'chapter/:id', component: ContentComponent}
