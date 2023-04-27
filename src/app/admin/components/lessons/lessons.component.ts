@@ -19,9 +19,7 @@ export class LessonsComponent implements OnInit{
   ngOnInit(): void {
     this.lessonService.getAllLessons()
     .subscribe((lessons) => {
-     
       this.lessons = lessons
-      console.log(this.lessons)
     })
   }
 

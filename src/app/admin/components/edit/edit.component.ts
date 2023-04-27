@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
-import { take } from 'rxjs';
+import { take, mergeMap } from 'rxjs';
 import { Chapter, Lesson } from 'src/app/base/interfaces/interfaces';
 import { LessonService } from 'src/app/services/lesson.service';
 
@@ -52,7 +52,6 @@ export class EditComponent {
     this.lessonService.getLesson(this.currentLessonId).subscribe(
       lesson => {
         this.lesson = lesson
-        
         this.editor = new Editor();
         this.formEditLesson = new FormGroup({
           text: new FormControl(lesson.text, Validators.required),
@@ -60,14 +59,20 @@ export class EditComponent {
         })
       } 
     )
-    
+
+    // запрашиваю раздел смапленный с этим уроком
+    this.lessonService.getChapterByLessonId(this.currentLessonId)
+    .subscribe(chapter => {
+      this.chapter = chapter
+    })
+
+   
   }
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 
   submit(){
-    console.log('Вызов самита')
     let formData = this.formEditLesson.value
     this.lesson  = {
       ...formData,
@@ -76,29 +81,48 @@ export class EditComponent {
     }
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
     .pipe(take(1))
-    .subscribe(response =>
-        console.log('итоговый респ', response)
-      )
+    .subscribe()
   }
 
   toArchive(){
     this.lesson.isDelete = true
+    
+    // ставим флаг, что урок удален
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
     .pipe(take(1))
-    .subscribe(response =>{
+    .subscribe(() =>{
         this.router.navigate(['/admin','lessons'])
-        console.log('итоговый респ', response)
       }
     )
+    // ставим isDelete  разделу
+    this.lessonService.getAllChapters()
+    .pipe(
+      take(1),
+      mergeMap((chapters) => {
+        let filteredChapters = chapters.filter(chapter => chapter.idLesson === this.lesson.id)
+        let chapterForUpdate = {
+          ...filteredChapters[0],
+          isDelete: true
+        }
+        return this.lessonService.updateChapter(chapterForUpdate, chapterForUpdate.id)
+      })
+      )
+    .subscribe()
   }
 
   removeFromArchive(){
     this.lesson.isDelete = false
+    let chapterForUpdate = {
+      ...this.chapter,
+      isDelete: false
+    }
+
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
     .pipe(take(1))
-    .subscribe(response =>{
-        console.log('итоговый респ', response)
-      }
-    )
+    .subscribe()
+
+    this.lessonService.updateChapter(chapterForUpdate, chapterForUpdate.id)
+    .pipe(take(1))
+    .subscribe()
   }
 }

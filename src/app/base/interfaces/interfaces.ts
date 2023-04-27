@@ -7,8 +7,10 @@ export interface Lesson {
 }
 
 export interface Chapter {
+    id?:string ,
     idLesson: string ,
-    title: string
+    title: string,
+    isDelete?: boolean
 }
 
 export interface User {

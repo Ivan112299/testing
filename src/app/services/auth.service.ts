@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   isAuth(){
-    console.log(!!this.token)
+    console.log('Авторизован? - ',!!this.token)
     return !!this.token
   }
   private handleError(error: HttpErrorResponse | any) : ObservableInput<any> {

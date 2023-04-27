@@ -26,7 +26,6 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     this.routeParam$ = this.route.params.subscribe((params: Params) =>{      
       this.currentPostId = params['id']
-      console.log('curId',this.currentPostId)
       this.currentChapter$ = this.lessonService.getLesson(this.currentPostId).subscribe((lesson) =>{
         this.currentChapter = lesson
       })

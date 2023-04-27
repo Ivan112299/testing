@@ -27,8 +27,9 @@ export class ChaptersComponent implements OnInit{
   }
   ngOnInit(): void {
     this.chapters$ = this.lessonService.getAllChapters().subscribe(
-      (lessons) => {
-        this.chapters = lessons
+      (chapters) => {
+        const activeChapters = chapters.filter(chapter => chapter.isDelete != true)
+        this.chapters = activeChapters
       }
     )
   }

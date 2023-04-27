@@ -32,17 +32,36 @@ export class LessonService {
     return this.http.get(`${this.fbDbUrl}/chapters.json`)
     .pipe(map((response:{[key: string]:any})=>{
         return Object.keys(response).map(key=>({
-            ...response[key]
+            ...response[key],
+            id: key
         }))
     }))
   }
 
   getLesson(id: string){
-    /*** метод получения списка всех разделов ***/
+    /*** метод получения раздела по id ***/
 
     return this.http.get(`${this.fbDbUrl}/lessons/${id}.json`)
-    .pipe(map((response)=>{
-        return response as Lesson
+    .pipe(map((response: any)=>{
+        let lesson = {
+          ...response,
+          id
+        }
+        return lesson as Lesson
+    }))
+  }
+
+  getChapterByLessonId(idLesson: string){
+    /*** метод получения списка всех разделов ***/
+
+    return this.http.get(`${this.fbDbUrl}/chapters.json/?orderBy="idLesson"&equalTo="${idLesson}"`)
+    .pipe(map((response:any)=>{
+        const id = Object.keys(response)[0]
+        let chapter = {
+          ...response[id],
+          id
+        }
+        return chapter as Chapter
     }))
   }
 
@@ -70,6 +89,15 @@ export class LessonService {
     return this.http.put(`${this.fbDbUrl}/lessons/${id}.json`, body)
     .pipe(map((response)=>{
         return response as fbUpdateResponse
+    }))
+  }
+
+  updateChapter(body: Chapter, id: string = 'test'){
+    /*** метод обновления раздела ***/
+
+    return this.http.put(`${this.fbDbUrl}/chapters/${id}.json`, body)
+    .pipe(map((response)=>{
+        return response 
     }))
   }
 }
