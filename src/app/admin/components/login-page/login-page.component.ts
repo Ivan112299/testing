@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router, Params, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,10 +12,11 @@ export class LoginPageComponent implements OnInit {
 
   loginForm!: FormGroup
   nonAuth!: Boolean
+  submitted: Boolean = false
  
 
   constructor (
-    private auth: AuthService, 
+    public auth: AuthService, 
     private router: Router,
     private activeRoute: ActivatedRoute){
     
@@ -28,15 +29,20 @@ export class LoginPageComponent implements OnInit {
     })
     
     this.loginForm = new FormGroup({
-      email: new FormControl('test@gmail.com'),
-      password: new FormControl('123456')
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('',[Validators.required, Validators.minLength(6)])
     })
   }
 
   submit(){
+    this.submitted = true
     this.auth.login(this.loginForm.value).subscribe(() => {
       this.loginForm.reset()
       this.router.navigate(['/admin','lessons'])
+      this.submitted = false
+    },() => {
+      //если неудачно так же сбрасываем
+      this.submitted = false;
     })
   }
 }

@@ -8,21 +8,54 @@
                     <input type="text" formControlName="email" required>
                     <label>Логин</label>
                 </div>
+                
                 <i class="fa-regular fa-envelope"></i>
-                <span *ngIf="">Ошибка</span>
+                <div 
+                    class="validation"
+                    *ngIf="loginForm.get('email')!.touched && loginForm.get('email')!.invalid"
+                    >
+                    <small
+                        *ngIf="loginForm.get('email')!.errors!['required']">
+                        Поле не заполнено
+                    </small>
+                    <small
+                        *ngIf="loginForm.get('email')!.errors!['email']">
+                        Введите корректный email
+                    </small>
+                </div>
+               
             </div>
             <div class="item">
                 <div class="input-box">
-                    
                     <input type="text" formControlName="password" required>
                     <label>Пароль</label>
                 </div>
                 <i class="fa-regular fa-user"></i>
+                <div 
+                    *ngIf="loginForm.get('password')!.touched && loginForm.get('password')?.errors?.['required']"       
+                    class="validation">
+                    <small>Пароль не должен быть пустым</small>
+                </div>
+                <div
+                    *ngIf="loginForm.get('password')?.errors?.['minlength']"
+                    class="validation">
+                    <small>Минимальная длинна {{6}} символов. </small>
+                </div>
             </div>
             <div class="item" (click)="submit()">
-                <button class="btn" type="submit">Войти</button>
+                <button 
+                    class="btn" 
+                    type="submit"
+                    [disabled]="loginForm.invalid || submitted"
+                    >Войти</button>
+            </div>
+            <div>
+                <span>Тестовые креды: test@gmail.com  123456</span>
             </div>
         </form>
+        <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+            {{error}}
+        </div>
     </div>    
 </div>
 

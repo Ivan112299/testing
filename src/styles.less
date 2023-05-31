@@ -219,6 +219,9 @@ body {
     background: transparent;
     backdrop-filter: blur(5px);
     .item{
+      .validation {
+        color: var(--primary-color)!important;
+      }
       .input-box{
         display: inline-block;
         width: 300px;
@@ -361,12 +364,28 @@ img {
 }
 
 .alert {
-  padding: 0.7rem;
-  margin: 1rem 0;
-  opacity: 0.9;
+  position: absolute;
+  border-radius: 10px;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  transform: translate(0px,-50px);
+  transition: 1s;
   background: var(--light-color);
   color: #333;
+  animation: ani 1.5s forwards;
 }
+@keyframes ani {
+  0% {
+    opacity: 0;
+    bottom: -50px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 10px;
+  }
+}
+
 
 .bg-primary{
   background:#65ad70 ;
@@ -447,10 +466,6 @@ img {
     input {
       border-color: var(--primary-color);
     }
-  }
-
-  .validation {
-    color: var(--primary-color);
   }
 }
 

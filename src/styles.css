@@ -201,6 +201,9 @@ body ::-webkit-scrollbar-thumb {
   background: transparent;
   backdrop-filter: blur(5px);
 }
+.login-page .form-box .item .validation {
+  color: var(--primary-color) !important;
+}
 .login-page .form-box .item .input-box {
   display: inline-block;
   width: 300px;
@@ -323,11 +326,26 @@ img {
   border-radius: 5px;
 }
 .alert {
-  padding: 0.7rem;
-  margin: 1rem 0;
-  opacity: 0.9;
+  position: absolute;
+  border-radius: 10px;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  transform: translate(0px, -50px);
+  transition: 1s;
   background: var(--light-color);
   color: #333;
+  animation: ani 1.5s forwards;
+}
+@keyframes ani {
+  0% {
+    opacity: 0;
+    bottom: -50px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 10px;
+  }
 }
 .bg-primary {
   background: #65ad70;
@@ -399,9 +417,6 @@ img {
 }
 .form-control.invalid input {
   border-color: var(--primary-color);
-}
-.form-control .validation {
-  color: var(--primary-color);
 }
 input[type='text'],
 input[type='email'],
