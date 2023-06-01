@@ -12,16 +12,13 @@ export class LessonItemComponent implements OnInit{
   @Input()
   lesson!: Lesson
   
-  @Output() 
-  dataChanged:EventEmitter<any> = new EventEmitter<any>()
+  @Output() dataChanged:EventEmitter<any> = new EventEmitter<any> ()
   
   constructor(){
 
   }
   onCheckboxChange(event: any){
-    this.dataChanged.emit({
-      msg: 'Сообщение события',
-    })
+    this.dataChanged.emit('asd')
     console.log('событие', event);
   }
   ngOnInit(): void {

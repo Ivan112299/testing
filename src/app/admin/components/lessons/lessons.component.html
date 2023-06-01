@@ -4,8 +4,8 @@
             [ngClass]="{archived : lesson.isDelete}" 
             *ngFor="let lesson of lessons">
             <app-lesson-item
-                [lesson] = "lesson">
-                (dataChanged)="dataChangedHandler($event)"
+                [lesson] = "lesson"
+                (dataChanged)="dataChangedHandler($event)">
             </app-lesson-item>
         </div>
     </div>
