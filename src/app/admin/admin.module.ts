@@ -9,6 +9,7 @@ import { LessonsComponent } from './components/lessons/lessons.component';
 import { AuthGuard } from '../services/auth.guard';
 import { NgxEditorModule } from 'ngx-editor';
 import { EditComponent } from './components/edit/edit.component';
+import { LessonItemComponent } from './components/lesson-item/lesson-item.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { EditComponent } from './components/edit/edit.component';
     LoginPageComponent,
     CreateComponent,
     LessonsComponent,
+    LessonItemComponent,
     EditComponent
   ],
   imports: [

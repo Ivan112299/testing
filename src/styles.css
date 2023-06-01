@@ -157,27 +157,30 @@ body ::-webkit-scrollbar-thumb {
 .edit-lessons-page .lessons-item {
   position: relative;
   margin: 15px;
-  padding: 10px;
+  padding: 15px;
   background-color: #ffffff11;
   width: 300px;
   height: 250px;
 }
 .edit-lessons-page .lessons-item .title {
-  margin: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .edit-lessons-page .lessons-item .text {
-  overflow: hidden;
+  overflow: auto;
   display: block;
-  width: 80%;
+  width: 100%;
   height: 60%;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.edit-lessons-page .lessons-item .archived {
+  color: #7f7f7f;
+  display: inline;
   margin: 10px;
 }
-.edit-lessons-page .lessons-item.archived {
-  color: #7f7f7f;
-  background-color: #ffffff34;
-}
-.edit-lessons-page .lessons-item small {
-  margin-left: 50px;
+.edit-lessons-page .lessons-item .archived input {
+  margin-right: 10px;
 }
 .edit-lessons-page .lessons-item:hover {
   border: 1px solid var(--active-link);
@@ -210,6 +213,7 @@ body ::-webkit-scrollbar-thumb {
   border-bottom: 1px solid var(--light-color);
 }
 .login-page .form-box .item .input-box input {
+  padding: 0px;
   width: 100%;
   height: 40px;
   background: transparent;

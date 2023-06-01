@@ -18,7 +18,6 @@ import { RouterModule } from '@angular/router';
     ChaptersComponent,
     ContentComponent,
     FeedbackComponent,
-    
   ],
   imports: [
     CommonModule,

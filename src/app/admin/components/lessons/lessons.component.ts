@@ -22,7 +22,9 @@ export class LessonsComponent implements OnInit{
       this.lessons = lessons
     })
   }
-
+  dataChangedHandler(e:Event){
+    console.log('dataChanged', e)
+  }
   ngOnDestroy(){
     this.lessons = []
   }
