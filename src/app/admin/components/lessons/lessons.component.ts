@@ -10,7 +10,9 @@ import { Lesson } from 'src/app/base/interfaces/interfaces';
 export class LessonsComponent implements OnInit{
 
   lessons: Lesson[] = []
-  
+  editedLessonTitle = ''
+  viewAlertSuccess = false
+  viewAlertErr = false
   constructor(
     private lessonService: LessonService
   ){
@@ -22,9 +24,21 @@ export class LessonsComponent implements OnInit{
       this.lessons = lessons
     })
   }
-  dataChangedHandler(e:Event){
-    console.log('dataChanged', e)
+  dataChangedHandler(lessonName:any){
+    this.editedLessonTitle = lessonName
+    this.viewAlertSuccess = true
+    setTimeout(()=>{
+      this.viewAlertSuccess = false
+    }, 3000)
   }
+
+  dataNotChangedHandler(){
+    this.viewAlertErr = true
+    setTimeout(()=>{
+      this.viewAlertErr = false
+    }, 3000)
+  }
+
   ngOnDestroy(){
     this.lessons = []
   }

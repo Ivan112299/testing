@@ -107,6 +107,7 @@ export class EditComponent {
         return this.lessonService.updateChapter(chapterForUpdate, chapterForUpdate.id)
       })
       )
+    .pipe(take(1))
     .subscribe()
   }
 

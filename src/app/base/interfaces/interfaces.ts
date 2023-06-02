@@ -1,6 +1,6 @@
 export interface Lesson {
     author: string
-    id?: number
+    id?: string
     text: string
     title: string
     isDelete?: boolean
