@@ -25,18 +25,13 @@ export class LessonsComponent implements OnInit{
     })
   }
   dataChangedHandler(lessonName:any){
-    this.editedLessonTitle = lessonName
+    this.editedLessonTitle = `Урок ${lessonName} обновлен`
     this.viewAlertSuccess = true
-    setTimeout(()=>{
-      this.viewAlertSuccess = false
-    }, 3000)
+  
   }
 
   dataNotChangedHandler(){
     this.viewAlertErr = true
-    setTimeout(()=>{
-      this.viewAlertErr = false
-    }, 3000)
   }
 
   ngOnDestroy(){

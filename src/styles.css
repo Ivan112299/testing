@@ -332,12 +332,15 @@ img {
 .alert {
   position: absolute;
   border-radius: 10px;
+  width: 400px;
+  margin-left: -200px;
   padding: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
   transform: translate(0px, -50px);
   transition: 1s;
   background: var(--light-color);
+  text-align: center;
   color: #333;
   animation: ani 1.5s forwards;
 }

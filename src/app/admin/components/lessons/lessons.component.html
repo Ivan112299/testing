@@ -1,19 +1,27 @@
 <div class="container">
     <div class="edit-lessons-page">
         <div 
-            [ngClass]="{archived : lesson.isDelete}" 
             *ngFor="let lesson of lessons">
             <app-lesson-item
+                [ngClass]="{archived : lesson.isDelete}"
                 [lesson] = "lesson"
                 (dataChanged)="dataChangedHandler($event)"
                 (dataNotChanged)="dataNotChangedHandler()">
             </app-lesson-item>
         </div>
-        <div class="alert alert-danger" *ngIf="viewAlertErr" >
-            Ошибка обновления урока
-        </div>
-        <div class="alert alert-success" *ngIf="viewAlertSuccess">
-            Урок {{editedLessonTitle}} обновлен
-        </div>
+        <app-alert 
+            *ngIf="viewAlertSuccess"
+            [delay]="4000"
+            [type]="'success'"
+            [text]="editedLessonTitle"
+            (close)="viewAlertSuccess = false">
+        </app-alert>
+        <app-alert 
+            *ngIf="viewAlertErr"
+            [delay]="4000"
+            [type]="'error'"
+            [text]="'Ошибка обновления'"
+            (close)="viewAlertErr = false">
+        </app-alert>
     </div>
 </div>

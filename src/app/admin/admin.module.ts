@@ -10,6 +10,7 @@ import { AuthGuard } from '../services/auth.guard';
 import { NgxEditorModule } from 'ngx-editor';
 import { EditComponent } from './components/edit/edit.component';
 import { LessonItemComponent } from './components/lesson-item/lesson-item.component';
+import { AlertComponent } from '../shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LessonItemComponent } from './components/lesson-item/lesson-item.compon
     CreateComponent,
     LessonsComponent,
     LessonItemComponent,
-    EditComponent
+    EditComponent,
+    AlertComponent
   ],
   imports: [
     ReactiveFormsModule,
