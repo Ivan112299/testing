@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeRoute.queryParams.subscribe(params => {
+    this.activeRoute.queryParams.subscribe(params => {      // можно не отписываться
       this.nonAuth = params['nonAuth']
       console.log('Авторизованы: ',params)
     })

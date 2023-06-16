@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Editor, Toolbar } from 'ngx-editor';
-import { mergeMap } from 'rxjs';
+import { Subject, mergeMap, take, takeUntil } from 'rxjs';
 import { Chapter, Lesson } from 'src/app/base/interfaces/interfaces';
 import { LessonService } from 'src/app/services/lesson.service';
 
@@ -11,7 +11,8 @@ import { LessonService } from 'src/app/services/lesson.service';
   styleUrls: ['./create.component.less']
 })
 export class CreateComponent implements OnInit {
-
+  
+  readonly destroyed$ = new Subject();
   editor!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -41,9 +42,6 @@ export class CreateComponent implements OnInit {
       title: new FormControl(null, Validators.required)
     })
   }
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
 
   submit(){
     let formData = this.formCreateLesson.value
@@ -61,11 +59,20 @@ export class CreateComponent implements OnInit {
               title: this.lesson.title
             }
         return this.lessonService.addChapter(this.chapter)
-      })
+      }),
+      take(1),
+      takeUntil(this.destroyed$)
     )
     .subscribe(response =>
         console.log('итоговый респ', response?.name)
       )
     this.formCreateLesson.reset()
+  }
+
+  ngOnDestroy() {
+    
+    this.destroyed$.next('');
+    this.destroyed$.complete();
+    this.editor.destroy();
   }
 }

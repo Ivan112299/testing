@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,9 +6,13 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.less']
 })
-export class AdminLayoutComponent {
+export class AdminLayoutComponent implements OnInit {
 
   constructor(private auth: AuthService){
+    
+  }
+  
+  ngOnInit(): void {
     
   }
 

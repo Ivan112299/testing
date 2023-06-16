@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
-import { take, mergeMap } from 'rxjs';
+import { take, mergeMap, Subject, takeUntil } from 'rxjs';
 import { Chapter, Lesson } from 'src/app/base/interfaces/interfaces';
 import { LessonService } from 'src/app/services/lesson.service';
 
@@ -13,6 +13,8 @@ import { LessonService } from 'src/app/services/lesson.service';
   styleUrls: ['./edit.component.less']
 })
 export class EditComponent {
+  
+  readonly destroyed$ = new Subject();
 
   editor!: Editor;
   toolbar: Toolbar = [
@@ -30,6 +32,9 @@ export class EditComponent {
   chapter!: Chapter
   currentLessonId!: string
   jsonDoc!: any
+  viewAlertSuccess = false
+  viewAlertErr = false
+  textAlert = ''
 
   constructor(
     private lessonService: LessonService,
@@ -68,9 +73,6 @@ export class EditComponent {
 
    
   }
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
 
   submit(){
     let formData = this.formEditLesson.value
@@ -80,8 +82,19 @@ export class EditComponent {
       author: 'Текущий пользователь'
     }
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
-    .pipe(take(1))
-    .subscribe()
+    .pipe(
+      take(1),
+      takeUntil(this.destroyed$))
+    .subscribe({
+      next:(()=>{
+        this.viewAlertSuccess = true
+        this.textAlert = 'Успешно обновлен'
+      }), error: ((err)=>{
+        this.viewAlertErr = true
+        this.textAlert = err.message
+        console.log('err', err)
+      })
+  })
   }
 
   toArchive(){
@@ -89,7 +102,9 @@ export class EditComponent {
     
     // ставим флаг, что урок удален
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
-    .pipe(take(1))
+    .pipe(
+      take(1),
+      takeUntil(this.destroyed$))
     .subscribe(() =>{
         this.router.navigate(['/admin','lessons'])
       }
@@ -98,6 +113,7 @@ export class EditComponent {
     this.lessonService.getAllChapters()
     .pipe(
       take(1),
+      takeUntil(this.destroyed$),
       mergeMap((chapters) => {
         let filteredChapters = chapters.filter(chapter => chapter.idLesson === this.lesson.id)
         let chapterForUpdate = {
@@ -107,7 +123,6 @@ export class EditComponent {
         return this.lessonService.updateChapter(chapterForUpdate, chapterForUpdate.id)
       })
       )
-    .pipe(take(1))
     .subscribe()
   }
 
@@ -119,11 +134,17 @@ export class EditComponent {
     }
 
     this.lessonService.updateLesson(this.lesson, this.currentLessonId)
-    .pipe(take(1))
+    .pipe(take(1),takeUntil(this.destroyed$))
     .subscribe()
 
     this.lessonService.updateChapter(chapterForUpdate, chapterForUpdate.id)
-    .pipe(take(1))
+    .pipe(take(1),takeUntil(this.destroyed$))
     .subscribe()
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next('');
+    this.destroyed$.complete();
+    this.editor.destroy();
   }
 }

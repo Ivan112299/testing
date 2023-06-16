@@ -1,7 +1,7 @@
 import { LessonService } from 'src/app/services/lesson.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Lesson } from 'src/app/base/interfaces/interfaces';
-import { map, mergeMap, take } from 'rxjs';
+import { Subject, map, mergeMap, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-lesson-item',
@@ -18,6 +18,7 @@ export class LessonItemComponent implements OnInit{
   dataNotChanged:EventEmitter<any> = new EventEmitter<any> ()
   
   isArchived!: boolean 
+  readonly destroyed$ = new Subject();
 
   constructor( private lessonService: LessonService,){
 
@@ -31,7 +32,9 @@ export class LessonItemComponent implements OnInit{
     }
 
     this.lessonService.updateLesson(lessonForUpdate, this.lesson.id!)
-    .pipe(take(1))
+    .pipe(
+      take(1),
+      takeUntil(this.destroyed$))
     .subscribe(
       { 
         next:()=> {
@@ -46,6 +49,7 @@ export class LessonItemComponent implements OnInit{
     this.lessonService.getAllChapters()
     .pipe(
       take(1),
+      takeUntil(this.destroyed$),
       mergeMap((chapters) => {
         let filteredChapters = chapters.filter(chapter => chapter.idLesson === this.lesson.id)
         let chapterForUpdate = {
@@ -55,7 +59,6 @@ export class LessonItemComponent implements OnInit{
         return this.lessonService.updateChapter(chapterForUpdate, chapterForUpdate.id)
       })
       )
-    .pipe(take(1))
     .subscribe()
   }
 
@@ -64,7 +67,8 @@ export class LessonItemComponent implements OnInit{
   }
 
   ngOnDestroy(){
-
+    this.destroyed$.next('')
+    this.destroyed$.complete()
   }
 
 }

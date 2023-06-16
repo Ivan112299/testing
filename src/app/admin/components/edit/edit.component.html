@@ -21,5 +21,18 @@
         </div>
         
     </form>
-    
+        <app-alert 
+            *ngIf="viewAlertSuccess"
+            [delay]="4000"
+            [type]="'success'"
+            [text]="textAlert"
+            (close)="viewAlertSuccess = false">
+        </app-alert>
+        <app-alert 
+            *ngIf="viewAlertErr"
+            [delay]="4000"
+            [type]="'error'"
+            [text]="textAlert"
+            (close)="viewAlertErr = false">
+        </app-alert>
 </div>

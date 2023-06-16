@@ -10,7 +10,7 @@ import { AuthGuard } from '../services/auth.guard';
 import { NgxEditorModule } from 'ngx-editor';
 import { EditComponent } from './components/edit/edit.component';
 import { LessonItemComponent } from './components/lesson-item/lesson-item.component';
-import { AlertComponent } from '../shared/alert/alert.component';
+import { AlertComponent } from '../shared/components/alert/alert.component';
 
 @NgModule({
   declarations: [

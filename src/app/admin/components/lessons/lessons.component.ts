@@ -1,6 +1,7 @@
 import { LessonService } from 'src/app/services/lesson.service';
 import { Component, OnInit } from '@angular/core';
 import { Lesson } from 'src/app/base/interfaces/interfaces';
+import { Subject, take, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-lessons',
@@ -13,6 +14,9 @@ export class LessonsComponent implements OnInit{
   editedLessonTitle = ''
   viewAlertSuccess = false
   viewAlertErr = false
+
+  readonly destroyed$ = new Subject();
+  
   constructor(
     private lessonService: LessonService
   ){
@@ -20,6 +24,10 @@ export class LessonsComponent implements OnInit{
   }
   ngOnInit(): void {
     this.lessonService.getAllLessons()
+    .pipe(
+      take(1),
+      takeUntil(this.destroyed$)
+    )
     .subscribe((lessons) => {
       this.lessons = lessons
     })
@@ -36,6 +44,8 @@ export class LessonsComponent implements OnInit{
 
   ngOnDestroy(){
     this.lessons = []
+    this.destroyed$.next('')
+    this.destroyed$.complete()
   }
 
 }
